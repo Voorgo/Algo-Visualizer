@@ -15,37 +15,41 @@ const BubbleSort = () => {
     { number: 4, color: "#dc2061" },
   ]);
   const [arraySize, setArraySize] = useState([0]);
-  const [time, setTime] = useState([100]);
-
-  const changeColor = async () => {
-    if (arr.length > 0) {
-      for (let i = 0; i < arr.length; i++) {
-        await sleep(time);
-        arr[i].color = "#ffef00";
-        if (i > 0) arr[i - 1].color = "#dc2061";
-        setArr([...arr]);
-      }
-    }
-  };
+  const [time, setTime] = useState([30]);
+  const [sorted, setSorted] = useState<boolean>(true);
 
   const bubbleSort = async () => {
+    let noSwap;
     if (arr.length > 0) {
-      for (let i = 0; i < arr.length - 1; i++) {
-        await sleep(time);
+      setSorted(false);
+      for (let i = 0; i < arr.length; i++) {
+        console.log(i);
+        noSwap = true;
         for (let j = 0; j < arr.length - 1 - i; j++) {
           if (arr[j].number > arr[j + 1].number) {
-            let temp = arr[j].number;
+            let temp;
             arr[j].color = "#ffef00";
             arr[j + 1].color = "#ffef00";
+            temp = arr[j];
 
-            arr[j].number = arr[j + 1].number;
-            arr[j + 1].number = temp;
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+
             setArr([...arr]);
+            await sleep(time);
+            noSwap = false;
           }
           arr[j].color = "#dc2061";
-          arr[j + 1].color = "#dc2061";
+          arr[j + 1].color = "#1b86ff";
         }
+        if (noSwap) break;
       }
+
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].color = "#1ee01e";
+      }
+      setArr([...arr]);
+      setSorted(true);
     }
   };
 
@@ -83,17 +87,23 @@ const BubbleSort = () => {
                   setArraySize={setArraySize}
                   values={arraySize}
                   setArray={setArr}
+                  sorted={sorted}
                 />
               </div>
             </div>
             <div className="w-max px-8 py-2 border rounded border-black bg-white">
               <div className="flex flex-col items-center gap-5">
                 <p className="text-xl font-semibold">Time</p>
-                <LabeledTime values={time} setTime={setTime} />
+                <LabeledTime values={time} setTime={setTime} sorted={sorted} />
               </div>
             </div>
           </div>
-          <Buttons array={arr} setArr={setArr} bubbleSort={bubbleSort} />
+          <Buttons
+            array={arr}
+            setArr={setArr}
+            bubbleSort={bubbleSort}
+            sorted={sorted}
+          />
         </div>
       </div>
     </AlgorithmMain>
