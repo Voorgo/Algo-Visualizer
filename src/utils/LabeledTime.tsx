@@ -1,16 +1,18 @@
 import * as React from "react";
 import { Range, getTrackBackground } from "react-range";
 
-const STEP = 50;
-const MIN = 100;
-const MAX = 400;
+const STEP = 30;
+const MIN = 30;
+const MAX = 390;
 
 const LabeledTime = ({
   values,
   setTime,
+  sorted,
 }: {
   values: number[];
   setTime: any;
+  sorted: boolean;
 }) => {
   return (
     <div
@@ -25,6 +27,7 @@ const LabeledTime = ({
         step={STEP}
         min={MIN}
         max={MAX}
+        disabled={sorted ? false : true}
         onChange={(values) => {
           setTime(values);
         }}

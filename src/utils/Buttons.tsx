@@ -2,15 +2,18 @@ const Buttons = ({
   array,
   setArr,
   bubbleSort,
+  sorted,
 }: {
   array: { number: number; color: string }[];
   setArr: any;
   bubbleSort: any;
+  sorted: boolean;
 }) => {
   const randomizeArray = () => {
     if (array.length > 0) {
       for (let i = 0; i < array.length; i++) {
         array[i].number = Math.floor(Math.random() * 100 + 1);
+        array[i].color = "#dc2061";
       }
       setArr([...array]);
     }
@@ -19,8 +22,11 @@ const Buttons = ({
   return (
     <div className="flex items-center gap-10">
       <button
-        className="flex gap-2 text-xl font-semibold items-center px-3 py-2 bg-[#fb3e62] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]"
+        className={`flex gap-2 text-xl ${
+          sorted ? null : "cursor-not-allowed"
+        } font-semibold items-center px-3 py-2 bg-[#fb3e62] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]`}
         onClick={randomizeArray}
+        disabled={sorted ? false : true}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +45,11 @@ const Buttons = ({
         Random
       </button>
       <button
-        className="flex gap-2 text-xl font-semibold items-center px-3 py-2 bg-[#0991ff] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]"
+        className={`flex gap-2 text-xl font-semibold ${
+          sorted ? null : "cursor-not-allowed"
+        } items-center px-3 py-2 bg-[#0991ff] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]`}
         onClick={bubbleSort}
+        disabled={sorted ? false : true}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

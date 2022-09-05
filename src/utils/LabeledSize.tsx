@@ -8,10 +8,12 @@ const LabeledSize = ({
   setArraySize,
   values,
   setArray,
+  sorted,
 }: {
   values: number[];
   setArraySize: any;
   setArray: any;
+  sorted: boolean;
 }) => {
   const changeArray = (value: number | number[]) => {
     const updatedArray: { number: number; color: string }[] = [];
@@ -36,6 +38,7 @@ const LabeledSize = ({
         step={STEP}
         min={MIN}
         max={MAX}
+        disabled={sorted ? false : true}
         onChange={(values) => {
           changeArray(values);
           setArraySize(values);
