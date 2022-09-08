@@ -2,7 +2,8 @@ import { useState } from "react";
 import AlgorithmMain from "../components/AlgorithmMain";
 import AlgorithmTitle from "../components/AlgorithmTitle";
 import { sleep } from "../utils/sleep";
-import { LabeledSize, LabeledTime, Buttons } from "../utils";
+import SpeedAndSizeControls from "../components/SpeedAndSizeControls";
+import Buttons from "../components/Buttons";
 
 const BubbleSort = () => {
   const [arr, setArr] = useState([
@@ -23,7 +24,6 @@ const BubbleSort = () => {
     if (arr.length > 0) {
       setSorted(false);
       for (let i = 0; i < arr.length; i++) {
-        console.log(i);
         noSwap = true;
         for (let j = 0; j < arr.length - 1 - i; j++) {
           if (arr[j].number > arr[j + 1].number) {
@@ -64,13 +64,13 @@ const BubbleSort = () => {
                 <div className="flex flex-col gap-2" key={i}>
                   <div
                     style={{
-                      width: `${Math.floor(1000 / arr.length)}px`,
+                      width: `${Math.floor(900 / arr.length)}px`,
                       height: `${e.number * 3}px`,
                       background: e.color,
                     }}
                     className="shadow-[3px_4px_8px_-1px_black] border border-white transition-[height]"
                   ></div>
-                  <div className="text-center text-white bg-black rounded border-white border shadow-[3px_4px_8px_-1px_black]">
+                  <div className="text-center text-white px-[2px] bg-black rounded border-white border shadow-[3px_4px_8px_-1px_black]">
                     {e.number}
                   </div>
                 </div>
@@ -79,29 +79,18 @@ const BubbleSort = () => {
           </div>
         </div>
         <div className="mt-8 mb-2 flex justify-center gap-10">
-          <div className="flex gap-10">
-            <div className="w-max px-8 py-2 border rounded border-black bg-white">
-              <div className="flex flex-col items-center gap-5">
-                <p className="text-xl font-semibold">Value</p>
-                <LabeledSize
-                  setArraySize={setArraySize}
-                  values={arraySize}
-                  setArray={setArr}
-                  sorted={sorted}
-                />
-              </div>
-            </div>
-            <div className="w-max px-8 py-2 border rounded border-black bg-white">
-              <div className="flex flex-col items-center gap-5">
-                <p className="text-xl font-semibold">Time</p>
-                <LabeledTime values={time} setTime={setTime} sorted={sorted} />
-              </div>
-            </div>
-          </div>
+          <SpeedAndSizeControls
+            setArr={setArr}
+            setArraySize={setArraySize}
+            sorted={sorted}
+            time={time}
+            setTime={setTime}
+            arraySize={arraySize}
+          />
           <Buttons
             array={arr}
             setArr={setArr}
-            bubbleSort={bubbleSort}
+            algorithm={bubbleSort}
             sorted={sorted}
           />
         </div>

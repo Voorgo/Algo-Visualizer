@@ -1,12 +1,12 @@
 const Buttons = ({
   array,
   setArr,
-  bubbleSort,
+  algorithm,
   sorted,
 }: {
   array: { number: number; color: string }[];
   setArr: any;
-  bubbleSort: any;
+  algorithm: any;
   sorted: boolean;
 }) => {
   const randomizeArray = () => {
@@ -48,7 +48,7 @@ const Buttons = ({
         className={`flex gap-2 text-xl font-semibold ${
           sorted ? null : "cursor-not-allowed"
         } items-center px-3 py-2 bg-[#0991ff] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]`}
-        onClick={bubbleSort}
+        onClick={algorithm}
         disabled={sorted ? false : true}
       >
         <svg
