@@ -14,7 +14,7 @@ const Header = () => {
                 <Link to="/bubblesort">Bubble Sort</Link>
               </li>
               <li>
-                <Link to="/quicksort">Quick Sort</Link>
+                <Link to="/selectionsort">Selection Sort</Link>
               </li>
               <li>
                 <Link to="/">N/A</Link>
