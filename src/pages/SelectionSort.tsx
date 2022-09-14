@@ -4,6 +4,7 @@ import AlgorithmTitle from "../components/AlgorithmTitle";
 import { sleep } from "../utils/sleep";
 import SpeedAndSizeControls from "../components/SpeedAndSizeControls";
 import Buttons from "../components/Buttons";
+import AlreadySortedModal from "../components/AlreadySortedModal";
 
 const SelectionSort = () => {
   const [arr, setArr] = useState([
@@ -17,7 +18,9 @@ const SelectionSort = () => {
   ]);
   const [arraySize, setArraySize] = useState([0]);
   const [time, setTime] = useState([30]);
-  const [sorted, setSorted] = useState<boolean>(true);
+  const [sorted, setSorted] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
 
   const selectionSort = async () => {
     const swap = (idx1: number, idx2: number) => {
@@ -27,6 +30,7 @@ const SelectionSort = () => {
     for (let i = 0; i < arr.length; i++) {
       let lowest = i;
       for (let j = i + 1; j < arr.length; j++) {
+        setDisabled(true);
         arr[j].color = "#ffef00";
         setArr([...arr]);
         await sleep(time);
@@ -34,7 +38,6 @@ const SelectionSort = () => {
           arr[lowest].color = "#dc2061";
           lowest = j;
           setArr([...arr]);
-          await sleep(time);
         }
         arr[lowest].color = "#5d0083";
         setArr([...arr]);
@@ -51,11 +54,13 @@ const SelectionSort = () => {
     }
     setArr([...arr]);
     setSorted(true);
+    setDisabled(false);
   };
 
   return (
     <AlgorithmMain>
-      <div className="w-full h-[80vh] bg-[#f1f1f1] flex flex-col gap-3 pt-5">
+      <>{visible && <AlreadySortedModal />}</>
+      <div className="w-full h-[80vh]  flex flex-col gap-3 pt-5">
         <AlgorithmTitle name="Selection Sort" />
         <div className="w-full grow flex flex-col justify-end">
           <div className="flex items-end justify-center w-full gap-2">
@@ -82,16 +87,20 @@ const SelectionSort = () => {
           <SpeedAndSizeControls
             setArr={setArr}
             setArraySize={setArraySize}
-            sorted={sorted}
+            disabled={disabled}
             time={time}
             setTime={setTime}
             arraySize={arraySize}
+            setSorted={setSorted}
           />
           <Buttons
             array={arr}
             setArr={setArr}
-            sorted={sorted}
+            disabled={disabled}
             algorithm={selectionSort}
+            sorted={sorted}
+            setSorted={setSorted}
+            setVisible={setVisible}
           />
         </div>
       </div>

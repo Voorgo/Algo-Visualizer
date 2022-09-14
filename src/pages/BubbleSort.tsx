@@ -4,6 +4,7 @@ import AlgorithmTitle from "../components/AlgorithmTitle";
 import { sleep } from "../utils/sleep";
 import SpeedAndSizeControls from "../components/SpeedAndSizeControls";
 import Buttons from "../components/Buttons";
+import AlreadySortedModal from "../components/AlreadySortedModal";
 
 const BubbleSort = () => {
   const [arr, setArr] = useState([
@@ -17,7 +18,9 @@ const BubbleSort = () => {
   ]);
   const [arraySize, setArraySize] = useState([0]);
   const [time, setTime] = useState([30]);
-  const [sorted, setSorted] = useState<boolean>(true);
+  const [sorted, setSorted] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
 
   const bubbleSort = async () => {
     let noSwap;
@@ -28,6 +31,7 @@ const BubbleSort = () => {
         for (let j = 0; j < arr.length - 1 - i; j++) {
           if (arr[j].number > arr[j + 1].number) {
             let temp;
+            setDisabled(true);
             arr[j].color = "#ffef00";
             arr[j + 1].color = "#ffef00";
             temp = arr[j];
@@ -50,12 +54,14 @@ const BubbleSort = () => {
       }
       setArr([...arr]);
       setSorted(true);
+      setDisabled(false);
     }
   };
 
   return (
     <AlgorithmMain>
-      <div className="w-full h-[80vh] bg-[#f1f1f1] flex flex-col gap-3 pt-5">
+      <>{visible && <AlreadySortedModal />}</>
+      <div className="w-full h-[80vh]  flex flex-col gap-3 pt-5">
         <AlgorithmTitle name="Bubble Sort" />
         <div className="w-full grow flex flex-col justify-end">
           <div className="flex items-end justify-center w-full gap-2">
@@ -82,16 +88,20 @@ const BubbleSort = () => {
           <SpeedAndSizeControls
             setArr={setArr}
             setArraySize={setArraySize}
-            sorted={sorted}
+            disabled={disabled}
             time={time}
             setTime={setTime}
             arraySize={arraySize}
+            setSorted={setSorted}
           />
           <Buttons
             array={arr}
             setArr={setArr}
             algorithm={bubbleSort}
+            disabled={disabled}
             sorted={sorted}
+            setSorted={setSorted}
+            setVisible={setVisible}
           />
         </div>
       </div>
