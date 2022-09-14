@@ -1,4 +1,5 @@
 import { Range, getTrackBackground } from "react-range";
+import { Dispatch, SetStateAction } from "react";
 
 const STEP = 1;
 const MIN = 0;
@@ -8,12 +9,14 @@ const LabeledSize = ({
   setArraySize,
   values,
   setArray,
-  sorted,
+  disabled,
+  setSorted,
 }: {
   values: number[];
-  setArraySize: any;
-  setArray: any;
-  sorted: boolean;
+  setArraySize: Dispatch<SetStateAction<number[]>>;
+  setArray: Dispatch<SetStateAction<{ number: number; color: string }[]>>;
+  disabled: boolean;
+  setSorted: Dispatch<SetStateAction<boolean>>;
 }) => {
   const changeArray = (value: number | number[]) => {
     const updatedArray: { number: number; color: string }[] = [];
@@ -24,6 +27,7 @@ const LabeledSize = ({
       };
     }
     setArray([...updatedArray]);
+    setSorted(false);
   };
   return (
     <div
@@ -38,7 +42,7 @@ const LabeledSize = ({
         step={STEP}
         min={MIN}
         max={MAX}
-        disabled={sorted ? false : true}
+        disabled={disabled}
         onChange={(values) => {
           changeArray(values);
           setArraySize(values);

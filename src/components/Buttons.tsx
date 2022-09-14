@@ -1,13 +1,21 @@
+import { Dispatch, SetStateAction } from "react";
+
 const Buttons = ({
   array,
   setArr,
   algorithm,
+  disabled,
   sorted,
+  setSorted,
+  setVisible,
 }: {
   array: { number: number; color: string }[];
-  setArr: any;
-  algorithm: any;
+  setArr: Dispatch<SetStateAction<{ number: number; color: string }[]>>;
+  algorithm: () => void;
+  disabled: boolean;
   sorted: boolean;
+  setSorted: Dispatch<SetStateAction<boolean>>;
+  setVisible: Dispatch<SetStateAction<boolean>>;
 }) => {
   const randomizeArray = () => {
     if (array.length > 0) {
@@ -16,17 +24,23 @@ const Buttons = ({
         array[i].color = "#dc2061";
       }
       setArr([...array]);
+      setSorted(false);
     }
+  };
+
+  const showModal = () => {
+    setVisible(true);
+    setTimeout(() => setVisible(false), 2000);
   };
 
   return (
     <div className="flex items-center gap-10">
       <button
         className={`flex gap-2 text-xl ${
-          sorted ? null : "cursor-not-allowed"
+          disabled ? "cursor-not-allowed" : null
         } font-semibold items-center px-3 py-2 bg-[#fb3e62] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]`}
         onClick={randomizeArray}
-        disabled={sorted ? false : true}
+        disabled={disabled}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -46,10 +60,10 @@ const Buttons = ({
       </button>
       <button
         className={`flex gap-2 text-xl font-semibold ${
-          sorted ? null : "cursor-not-allowed"
+          disabled ? "cursor-not-allowed" : null
         } items-center px-3 py-2 bg-[#0991ff] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]`}
-        onClick={algorithm}
-        disabled={sorted ? false : true}
+        onClick={() => (sorted ? showModal() : algorithm())}
+        disabled={disabled}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

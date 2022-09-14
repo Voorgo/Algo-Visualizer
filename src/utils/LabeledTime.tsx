@@ -1,5 +1,5 @@
-import * as React from "react";
 import { Range, getTrackBackground } from "react-range";
+import { Dispatch, SetStateAction } from "react";
 
 const STEP = 30;
 const MIN = 30;
@@ -8,11 +8,11 @@ const MAX = 390;
 const LabeledTime = ({
   values,
   setTime,
-  sorted,
+  disabled,
 }: {
   values: number[];
-  setTime: any;
-  sorted: boolean;
+  setTime: Dispatch<SetStateAction<number[]>>;
+  disabled: boolean;
 }) => {
   return (
     <div
@@ -27,7 +27,7 @@ const LabeledTime = ({
         step={STEP}
         min={MIN}
         max={MAX}
-        disabled={sorted ? false : true}
+        disabled={disabled}
         onChange={(values) => {
           setTime(values);
         }}
