@@ -21,20 +21,24 @@ const Header = () => {
     <header className="w-full shadow-lg">
       <nav>
         <div className="w-full max-w-6xl flex mx-auto px-5 py-4 justify-between">
-          <div className="text-2xl font-bold">
-            <Link to="/" className="flex items-center gap-3">
+          <div className="text-xl font-bold">
+            <Link
+              to="/"
+              className="flex items-center gap-3"
+              onClick={AbbreviateTitle}
+            >
               <img
                 src={require("../images/logo.png")}
                 alt="logo"
-                width="48px"
-                height="48px"
-                className="h-[48px]"
+                width="40px"
+                height="40px"
+                className="h-[40px]"
               />
               Algo Visualizer
             </Link>
           </div>
           <div className="self-center">
-            <ul className="flex gap-20 items-center text-xl font-semibold">
+            <ul className="flex gap-20 items-center font-semibold">
               <li>
                 <Link
                   to="/bubblesort"
