@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { Header, Home } from "./components";
-import { BubbleSort, SelectionSort, InsertionSort } from "./pages";
+import { Header } from "./components";
+import { BubbleSort, SelectionSort, InsertionSort, Home } from "./pages";
 
 function App() {
   return (
