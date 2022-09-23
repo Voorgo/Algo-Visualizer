@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Algo-Visualizer/static/css/main.dadc6f7e.css",
+    "main.js": "/Algo-Visualizer/static/js/main.30482e49.js",
+    "static/media/bubble.png": "/Algo-Visualizer/static/media/bubble.78166f4c709f21a0265c.png",
+    "static/media/selection.png": "/Algo-Visualizer/static/media/selection.84c929ad477d1b622410.png",
+    "static/media/insertion.png": "/Algo-Visualizer/static/media/insertion.f098dc956f0a5fc33917.png",
+    "index.html": "/Algo-Visualizer/index.html",
+    "main.dadc6f7e.css.map": "/Algo-Visualizer/static/css/main.dadc6f7e.css.map",
+    "main.30482e49.js.map": "/Algo-Visualizer/static/js/main.30482e49.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dadc6f7e.css",
+    "static/js/main.30482e49.js"
+  ]
+}
