@@ -31,15 +31,21 @@ const InsertionSort = () => {
       await sleep(time);
       for (var j = i - 1; j >= 0 && arr[j].number > currentValue; j--) {
         setDisabled(true);
+        arr[j + 1].color = "yellow";
         arr[j + 1].number = arr[j].number;
-        arr[j + 1].color = "purple";
+        await sleep(time);
+        arr[j + 1].color = "#dc2061";
         setArr([...arr]);
       }
-      arr[j + 1].number = currentValue;
       arr[i].color = "#dc2061";
-      arr[j + 1].color = "#dc2061";
+      setArr([...arr]);
+      arr[j + 1].number = currentValue;
       setArr([...arr]);
     }
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].color = "#1ee01e";
+    }
+    setArr([...arr]);
     setSorted(true);
     setDisabled(false);
   };

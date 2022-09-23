@@ -35,7 +35,6 @@ const BubbleSort = () => {
             arr[j].color = "#ffef00";
             arr[j + 1].color = "#ffef00";
             temp = arr[j];
-
             arr[j] = arr[j + 1];
             arr[j + 1] = temp;
 
