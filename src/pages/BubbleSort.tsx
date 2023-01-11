@@ -22,7 +22,7 @@ const BubbleSort = () => {
   const [disabled, setDisabled] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
 
-  const bubbleSort = async () => {
+  const bubbleSort = async (arr: { number: number; color: string }[]) => {
     let noSwap;
     if (arr.length > 0) {
       setSorted(false);

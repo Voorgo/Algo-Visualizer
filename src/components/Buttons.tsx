@@ -11,7 +11,7 @@ const Buttons = ({
 }: {
   array: { number: number; color: string }[];
   setArr: Dispatch<SetStateAction<{ number: number; color: string }[]>>;
-  algorithm: () => void;
+  algorithm: (parameter?: any) => void;
   disabled: boolean;
   sorted: boolean;
   setSorted: Dispatch<SetStateAction<boolean>>;
@@ -62,7 +62,7 @@ const Buttons = ({
         className={`flex gap-2 text-xl font-semibold ${
           disabled ? "cursor-not-allowed" : null
         } items-center px-3 py-2 bg-[#0991ff] text-white rounded shadow-[0px_0px_4px_1px_gray] hover:shadow-[0px_0px_8px_2px_gray]`}
-        onClick={() => (sorted ? showModal() : algorithm())}
+        onClick={() => (sorted ? showModal() : algorithm(array))}
         disabled={disabled}
       >
         <svg

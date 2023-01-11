@@ -6,7 +6,12 @@ import SpeedAndSizeControls from "../components/SpeedAndSizeControls";
 import Buttons from "../components/Buttons";
 import AlreadySortedModal from "../components/AlreadySortedModal";
 
-const SelectionSort = () => {
+interface ArrayType {
+  number: number;
+  color: string;
+}
+
+const MergeSort = () => {
   const [arr, setArr] = useState([
     { number: 38, color: "#dc2061" },
     { number: 12, color: "#dc2061" },
@@ -21,40 +26,37 @@ const SelectionSort = () => {
   const [sorted, setSorted] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
-
-  const selectionSort = async (arr: { number: number; color: string }[]) => {
-    const swap = (idx1: number, idx2: number) => {
-      [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
-    };
-    setSorted(false);
-    for (let i = 0; i < arr.length; i++) {
-      let lowest = i;
-      for (let j = i + 1; j < arr.length; j++) {
-        setDisabled(true);
-        arr[j].color = "#ffef00";
-        setArr([...arr]);
-        await sleep(time);
-        if (arr[lowest].number > arr[j].number) {
-          arr[lowest].color = "#dc2061";
-          lowest = j;
-          setArr([...arr]);
-        }
-        arr[lowest].color = "#5d0083";
-        setArr([...arr]);
-        arr[j].color = "#dc2061";
+  const mergeArrays = async (arr1: ArrayType[], arr2: ArrayType[]) => {
+    let results = [];
+    let i = 0;
+    let j = 0;
+    while (i < arr1.length && j < arr2.length) {
+      // await sleep(time);
+      if (arr2[j].number > arr1[i].number) {
+        results.push(arr1[i]);
+        i++;
+      } else {
+        results.push(arr2[j]);
+        j++;
       }
-      if (i !== lowest) {
-        swap(i, lowest);
-      }
-      arr[i].color = "#1b86ff";
-      setArr([...arr]);
     }
-    for (let i = 0; i < arr.length; i++) {
-      arr[i].color = "#1ee01e";
+    while (i < arr1.length) {
+      results.push(arr1[i]);
+      i++;
     }
-    setArr([...arr]);
-    setSorted(true);
-    setDisabled(false);
+    while (j < arr2.length) {
+      results.push(arr2[j]);
+      j++;
+    }
+    setArr([...results]);
+    return results;
+  };
+  const mergeSort = async (arr: ArrayType[]) => {
+    if (arr.length <= 1) return arr;
+    let mid = Math.floor(arr.length / 2);
+    let left: any = await mergeSort(arr.slice(0, mid));
+    let right: any = await mergeSort(arr.slice(mid));
+    return mergeArrays(left, right);
   };
 
   return (
@@ -97,7 +99,7 @@ const SelectionSort = () => {
             array={arr}
             setArr={setArr}
             disabled={disabled}
-            algorithm={selectionSort}
+            algorithm={mergeSort}
             sorted={sorted}
             setSorted={setSorted}
             setVisible={setVisible}
@@ -108,4 +110,4 @@ const SelectionSort = () => {
   );
 };
 
-export default SelectionSort;
+export default MergeSort;

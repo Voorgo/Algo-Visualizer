@@ -5,12 +5,15 @@ const Header = () => {
     let bubble = document.querySelector("#bubble") as HTMLAnchorElement;
     let selection = document.querySelector("#selection") as HTMLAnchorElement;
     let insertion = document.querySelector("#insertion") as HTMLAnchorElement;
+    let merge = document.querySelector("#merge") as HTMLAnchorElement;
     bubble.innerText = "BUB";
     selection.innerText = "SEL";
     insertion.innerText = "INS";
+    merge.innerText = "MER";
     bubble.title = "Bubble Sort";
     selection.title = "Selection Sort";
     insertion.title = "Insertion Sort";
+    merge.title = "Merge Sort";
   };
 
   const clicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -23,7 +26,7 @@ const Header = () => {
         <div className="w-full max-w-6xl flex mx-auto px-5 py-4 justify-between">
           <div className="text-xl font-bold">
             <Link
-              to="/"
+              to="/Algo-Visualizer"
               className="flex items-center gap-3"
               onClick={AbbreviateTitle}
             >
@@ -70,6 +73,17 @@ const Header = () => {
                   id="insertion"
                 >
                   INS
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/mergesort"
+                  title="Merge Sort"
+                  className="px-3 py-2 rounded transition-[background] duration-200 hover:bg-gray-200"
+                  onClick={(e) => clicked(e)}
+                  id="merge"
+                >
+                  MER
                 </Link>
               </li>
             </ul>

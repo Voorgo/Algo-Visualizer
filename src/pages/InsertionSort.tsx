@@ -22,7 +22,7 @@ const InsertionSort = () => {
   const [disabled, setDisabled] = useState<boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
 
-  const insertionSort = async () => {
+  const insertionSort = async (arr: { number: number; color: string }[]) => {
     setSorted(false);
     for (let i = 1; i < arr.length; i++) {
       let currentValue = arr[i].number;
